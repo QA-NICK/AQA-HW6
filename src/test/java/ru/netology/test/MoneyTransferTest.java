@@ -38,7 +38,7 @@ public class MoneyTransferTest {
 
 
     @Test
-    void shouldTransferAmountFromFirstToSecondCard() {
+    void shouldTransferAmountFromSecondToFirstCard() {
         open("http://localhost:9999/");
         var loginPage = new LoginPage();
         var autoInfo = DataGenerator.getAuthInfo();
@@ -61,7 +61,7 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferAmountFromSecondToFirstCard() {
+    void shouldTransferAmountFromFirstToSecondCard() {
         open("http://localhost:9999/");
         var loginPage = new LoginPage();
         var autoInfo = DataGenerator.getAuthInfo();
@@ -82,7 +82,7 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferZeroAmountFromSecondToFirstCard() {
+    void shouldTransferZeroAmountFromFirstToSecondCard() {
         open("http://localhost:9999/");
         var loginPage = new LoginPage();
         var autoInfo = DataGenerator.getAuthInfo();
@@ -105,7 +105,7 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferZeroAmountFromFirstToSecondCard() {
+    void shouldTransferZeroAmountFromSecondToFirstCard() {
         open("http://localhost:9999/");
         var loginPage = new LoginPage();
         var autoInfo = DataGenerator.getAuthInfo();
@@ -128,7 +128,7 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferAmountEqualBalanceFromSecondToFirstCard() {
+    void shouldTransferAmountEqualBalanceFromFirstToSecondCard() {
         open("http://localhost:9999/");
         var loginPage = new LoginPage();
         var autoInfo = DataGenerator.getAuthInfo();
@@ -166,6 +166,28 @@ public class MoneyTransferTest {
         var actualSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo);
         assertEquals(expectedFirstCardBalance, actualFirstCardBalance);
         assertEquals(expectedSecondCardBalance, actualSecondCardBalance);
+    }
+    @Test
+    void shouldTransferDoubleAmountFromFirstToSecondCard() {
+        open("http://localhost:9999/");
+        var loginPage = new LoginPage();
+        var autoInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(autoInfo);
+        var verificationInfo = DataGenerator.getVerificationCodeFor(autoInfo);
+        var dashBordPage = verificationPage.validVerify(verificationInfo);
+        var firstCArdInfo = DataGenerator.getFirstCardInf();
+        var secondCardInfo = DataGenerator.getSecondCardInf();
+        double transferSum = 100.20;
+        var expectedFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo) + transferSum;
+        var expectedSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo) - transferSum;
+        var transferPage = dashBordPage.selectCardForTransfer(firstCArdInfo);
+        dashBordPage = transferPage.makeTransfer(String.valueOf(transferSum), secondCardInfo);
+        var actualFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo);
+        var actualSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo);
+        assertEquals(expectedFirstCardBalance, actualFirstCardBalance);
+        assertEquals(expectedSecondCardBalance, actualSecondCardBalance);
+
+
     }
 }
 
