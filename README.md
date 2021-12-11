@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/oe0v93a1v4dt58v7/branch/master?svg=true)](https://ci.appveyor.com/project/QA-NICK/aqa-hw6/branch/master)
