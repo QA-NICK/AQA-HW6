@@ -147,25 +147,25 @@ public class MoneyTransferTest {
         assertEquals(expectedFirstCardBalance, actualFirstCardBalance);
         assertEquals(expectedSecondCardBalance, actualSecondCardBalance);
     }
-//    @Test
-//    void shouldTransferAmountOverBalanceFromSecondToFirstCard() {
-//        open("http://localhost:9999/");
-//        var loginPage = new LoginPage();
-//        var autoInfo = DataGenerator.getAuthInfo();
-//        var verificationPage = loginPage.validLogin(autoInfo);
-//        var verificationInfo = DataGenerator.getVerificationCodeFor(autoInfo);
-//        var dashBordPage = verificationPage.validVerify(verificationInfo);
-//        var firstCArdInfo = DataGenerator.getFirstCardInf();
-//        var secondCardInfo = DataGenerator.getSecondCardInf();
-//        int transferSum = 20000;
-//        var expectedFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo) ;
-//        var expectedSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo) ;
-//        var transferPage = dashBordPage.selectCardForTransfer(secondCardInfo);
-//        dashBordPage = transferPage.makeTransfer(String.valueOf(transferSum), firstCArdInfo);
-//        var actualFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo);
-//        var actualSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo);
-//        assertEquals(expectedFirstCardBalance, actualFirstCardBalance);
-//        assertEquals(expectedSecondCardBalance, actualSecondCardBalance);
-//    }
+    @Test
+    void shouldTransferAmountOverBalanceFromSecondToFirstCard() {
+        open("http://localhost:9999/");
+        var loginPage = new LoginPage();
+        var autoInfo = DataGenerator.getAuthInfo();
+        var verificationPage = loginPage.validLogin(autoInfo);
+        var verificationInfo = DataGenerator.getVerificationCodeFor(autoInfo);
+        var dashBordPage = verificationPage.validVerify(verificationInfo);
+        var firstCArdInfo = DataGenerator.getFirstCardInf();
+        var secondCardInfo = DataGenerator.getSecondCardInf();
+        int transferSum = 20000;
+        var expectedFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo) ;
+        var expectedSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo) ;
+        var transferPage = dashBordPage.selectCardForTransfer(secondCardInfo);
+        dashBordPage = transferPage.makeTransfer(String.valueOf(transferSum), firstCArdInfo);
+        var actualFirstCardBalance = dashBordPage.getCardBalance(firstCArdInfo);
+        var actualSecondCardBalance = dashBordPage.getCardBalance(secondCardInfo);
+        assertEquals(expectedFirstCardBalance, actualFirstCardBalance);
+        assertEquals(expectedSecondCardBalance, actualSecondCardBalance);
+    }
 }
 
